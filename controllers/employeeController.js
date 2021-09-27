@@ -8,8 +8,10 @@ module.exports = {
     db.Employee
       .find({})
       .then(dbModel =>{
-        console.log (dbModel)
-        res.json(dbModel);
+        console.log (dbModel);
+        res.setHeader("Description", "Retrieved all Perficient employees.");
+        res.setHeader("X-Total-Count", dbModel.length);
+        res.status(200).json(dbModel);
       })
       .catch(err => {
         res.status(422).json(err);
@@ -18,10 +20,16 @@ module.exports = {
 
   //Create a Perficient employee.
   createEmployee: function(req, res){
+    req.body.id = uuid.v4();
+    req.body.skills.forEach(skill =>{
+      skill.id = uuid.v4();
+      skill.field.id = uuid.v4();
+    })
     db.Employee
     .create(req.body)
     .then(dbModel => res.status(201).json(dbModel))
     .catch(err => {
+      console.log (err);
       res.status(422).json({status:"Invalid Perficient employee data sent to server."});
     });
 },
@@ -34,7 +42,7 @@ module.exports = {
     }
 
     db.Employee
-    .findById({_id: req.params.employeeId})
+    .findOne({id: req.params.employeeId})
     .then(dbModel => {
       if (dbModel === null){
         res.status(404).json({status:"Perficient employee not found."});
@@ -52,7 +60,7 @@ module.exports = {
     }
     
     db.Employee
-    .findOneAndUpdate({_id: req.params.employeeId}, req.body)
+    .findOneAndUpdate({id: req.params.employeeId}, req.body)
     .then(dbModel => {
       if (dbModel === null){
         res.status(404).json({status:"Perficient employee not found."});
@@ -70,7 +78,7 @@ module.exports = {
     }
 
     db.Employee
-      .findByIdAndDelete({_id: req.params.employeeId}, req.body)
+      .findOneAndDelete({id: req.params.employeeId}, req.body)
       .then(dbModel => {
         if (dbModel === null){
           res.status(404).json({status:"Perficient employee not found."});
@@ -88,11 +96,12 @@ module.exports = {
     }
 
     db.Employee
-    .findById({_id: req.params.employeeId})
+    .findOne({id: req.params.employeeId})
     .then(dbModel => {
       if (dbModel === null){
         res.status(404).json({status:"Perficient employee not found."});
       }
+      res.setHeader("X-Total-Count", dbModel.skills.length);
       res.status(200).json(dbModel.skills);
       })
     .catch(err => res.status(422).json(err));
@@ -105,8 +114,10 @@ module.exports = {
         res.status(400).json({status:"Invalid ID format"});
     }
     
+    req.body.id = uuid.v4();
+    req.body.field.id = uuid.v4();
     db.Employee
-    .findOneAndUpdate({_id: req.params.employeeId}, {$push: {"skills": req.body}}, {new: true})
+    .findOneAndUpdate({id: req.params.employeeId}, {$push: {"skills": req.body}}, {new: true})
     .then(dbModel => {
       if (dbModel === null){
         res.status(404).json({status:"Perficient employee not found."});
@@ -126,14 +137,17 @@ module.exports = {
     }
 
     db.Employee
-    .findById({_id: req.params.employeeId, "skills": req.params.skillId})
+    .findOne({id: req.params.employeeId, "skills.id": req.params.skillId})
     .then(dbModel => {
       if (dbModel === null){
         res.status(404).json({status:"Technical skill or Perficient employee not found."});
       }
       res.status(200).json(dbModel);
       })
-    .catch(err => res.status(422).json(err));
+    .catch(err => {
+      console.log (err);
+      res.status(422).json(err);
+    });
   },
 
   //Update a technical skill, from a Perficient employee, by ID.
@@ -146,14 +160,19 @@ module.exports = {
   }
     
     db.Employee
-    .findOneAndUpdate({_id: req.params.employeeId, "skills": req.params.skillId}, {$set: {"skills.$": req.body}}, {new: true})
+    .findOneAndUpdate({id: req.params.employeeId, "skills.id": req.params.skillId}, {$set: {"skills.$": req.body}}, {new: true})
     .then(dbModel => {
       if (dbModel === null){
         res.status(404).json({status:"Technical skill or Perficient employee not found."});
       }
-      res.status(200).json(dbModel);
+      const skill = dbModel.skills.find(skill => skill.id === req.params.skillId);
+      res.setHeader("Description", "Updated a technical skill, from a Perficient employee, by ID.");
+      res.status(200).json(skill);
       })
-    .catch(err => res.status(422).json({status: "Invalid Perficient employee data sent to server."}));
+    .catch(err => {
+      console.log(err);
+      res.status(422).json({status: "Invalid Perficient employee data sent to server."});
+    });
   },
 
   //Delete a technical skill, from a Perficient employee, by ID.
@@ -166,12 +185,12 @@ module.exports = {
   }
     
     db.Employee
-    .findOneAndUpdate({_id: req.params.employeeId}, {$pull: {"skills": req.params.skillId}})
+    .findOneAndUpdate({id: req.params.employeeId}, {$pull: {"skills": {"id": req.params.skillId}}})
     .then(dbModel => {
       if (dbModel === null){
         res.status(404).json({status:"Technical skill or Perficient employee not found."});
       }
-      res.status(204).json({status: "Deleted a technical skill, from a Perficient employee, by ID."});
+      res.status(204).setHeader("Description", "Deleted a technical skill, from a Perficient employee, by ID.");
       })
     .catch(err => res.status(422).json({status: "Invalid Perficient employee data sent to server."}));
   },
