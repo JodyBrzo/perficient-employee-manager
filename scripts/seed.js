@@ -22,6 +22,7 @@ const buinessUnit = {
 
 let chiefSeed = [
   {
+    id: "6d70d4e4-be1b-4364-b264-ad726b03038b",
     firstName: "Alex",
     lastName: "Jones",
     address: {
@@ -40,12 +41,14 @@ let chiefSeed = [
     buinessUnit: buinessUnit.DIGITAL_EXPERIENCE_GROUP,
     skills: [
       {
-        field: {
-          name:"Corporate Management",
-          type: "Software Industry",
-        },
+        id:"03dc545f-7000-4965-9aeb-b9bf8b09f72b",
         experience: 120,
-        summary: "Makes Decisions"
+        summary: "Makes Decisions",
+        field: {
+          id:"b0e878ac-c102-4a45-89ad-04e44ed6f2e9",
+          name:"Corporate Management",
+          type: "Software Industry"
+        }
       }
     ],
     assignedTo: null,
@@ -55,6 +58,7 @@ let chiefSeed = [
 function superiorSeed (chiefIds){
   let dataSeed = [
     {
+      id: "76e12674-5d75-46f9-ac21-acc2d112100c",
       firstName: "Tom",
       lastName: "Smith",
       address: {
@@ -73,17 +77,20 @@ function superiorSeed (chiefIds){
       buinessUnit: buinessUnit.API_MANAGEMENT,
       skills: [
         {
-          field: {
-            name:"Enterprise Architect",
-            type: "Software Developement",
-          },
+          id: "fc55fde4-4385-406a-af5b-372194084c38",
           experience: 85,
-          summary: "Oversees the group of developers"
+          summary: "Oversees the group of developers",
+          field: {
+            id: "631c75e3-0b27-4df4-b131-d51d605746e3",
+            name:"Enterprise Architect",
+            type: "Software Developement"
+          }
         }
       ],
       assignedTo: mongoose.Types.ObjectId(chiefIds[0]),
     },
     {
+      id: "674cbaaa-1cb9-40c7-97ff-b20240818be4",
       firstName: "Mary",
       lastName: "Thomas",
       address: {
@@ -102,12 +109,14 @@ function superiorSeed (chiefIds){
       buinessUnit: buinessUnit.IBM_NBU,
       skills: [
         {
-          field: {
-            name:"Enterprise Architect",
-            type: "Software Developement",
-          },
+          id: "5f9446c7-abb7-4a99-a5d7-3434a791ff46",
           experience: 85,
-          summary: "Oversees the group of developers"
+          summary: "Oversees the group of developers",
+          field: {
+            id: "ad479a3c-4a68-4cf1-9883-29013bb5eb31",
+            name:"Enterprise Architect",
+            type: "Software Developement"
+          }
         }
       ],
       assignedTo: mongoose.Types.ObjectId(chiefIds[0]),
@@ -120,6 +129,7 @@ function employeeSeed(superiorIds){
 
   let dataSeed = [
       {
+        id: "519434ef-acda-4cbb-b2fc-cd59ef880507",
         firstName: "John",
         lastName: "Doe",
         address: {
@@ -138,17 +148,20 @@ function employeeSeed(superiorIds){
         buinessUnit: buinessUnit.ADOBE,
         skills: [
           {
-            field: {
-              name:"Java",
-              type: "Software Developement",
-            },
+            id: "d8154468-d6bf-4870-bc54-3a1b7181d18f",
             experience: 45,
-            summary: "Worked with mulit-threading and generics."
+            summary: "Worked with mulit-threading and generics.",
+            field: {
+              id: "ade1e100-8af9-43ac-926c-175bc2b3b39c",
+              name:"Java",
+              type: "Software Developement"
+            }
           }
         ],
         assignedTo: mongoose.Types.ObjectId(superiorIds[0]),
       },
       {
+        id: "943881f2-96d0-45ea-9ff3-0c04fe45da31",
         firstName: "Jane",
         lastName: "Doe",
         address: {
@@ -167,25 +180,30 @@ function employeeSeed(superiorIds){
         buinessUnit: buinessUnit.DIGITAL_EXPERIENCE_GROUP,
         skills: [
           {
+            id: "27b00b5c-5dac-489a-bafe-4b5f0313f94e",
+            experience: 36,
+            summary: "Worked with RESTful APIs.",
             field: {
+              id: "977530a4-3936-4f2d-8b9b-ba2d1ca6e6f5",
               name:".NET",
-              type: "Software Developement",
-            },
-            experience: 60,
-            summary: "Worked with ASP.NET MVC."
+              type: "Software Developement"
+            }
           },
           {
-            field: {
-              name:"nodejs",
-              type: "Software Developement",
-            },
+            id: "180b9329-f04e-4399-9b39-e5197fdb5219",
             experience: 36,
-            summary: "Worked with RESTful APIs."
+            summary: "Worked with RESTful APIs.",
+            field: {
+              id: "667deeb9-048b-4267-ad06-34a9854d0cc2",
+              name:"nodejs",
+              type: "Software Developement"
+            }
           }
         ],
         assignedTo: mongoose.Types.ObjectId(superiorIds[0]),
       },
       {
+        id: "de253c69-068d-40e1-8459-e089a21289a5",
         firstName: "Jane",
         lastName: "Smith",
         address: {
@@ -204,25 +222,30 @@ function employeeSeed(superiorIds){
         buinessUnit: buinessUnit.IBM_NBU,
         skills: [
           {
-            field: {
-              name:"Full Stack",
-              type: "Software Developement",
-            },
+            id: "1f512f9d-7637-4b37-bb5d-55a16286dd12",
             experience: 24,
-            summary: "express and node"
+            summary: "express and node",
+            field: {
+              id: "5e33bb8f-2230-4909-b5af-fa388d923d01",
+              name:"Full Stack",
+              type: "Software Developement"
+            }
           },
           {
-            field: {
-              name:"SQL Server",
-              type: "Database Developement",
-            },
+            id: "d7f3b4b2-af7a-4193-b5dd-8b8f1bd73f05",
             experience: 36,
-            summary: "designed databases and implemented  stored procedures"
+            summary: "designed databases and implemented  stored procedures",
+            field: {
+              id: "1b0d82d8-70da-4d7c-b3ad-697a8679ebbc",
+              name:"SQL Server",
+              type: "Database Developement"
+            }
           }
         ],
         assignedTo: mongoose.Types.ObjectId(superiorIds[1]),
       },
       {
+        id: "",
         firstName: "john",
         lastName: "Smith",
         address: {
@@ -241,20 +264,24 @@ function employeeSeed(superiorIds){
         buinessUnit: buinessUnit.DIGITAL_EXPERIENCE_GROUP,
         skills: [
           {
-            field: {
-              name:"MongoDB",
-              type: "Data Analytics",
-            },
+            id: "66cdcf08-d5a9-4b13-9d0a-da469323441e",
             experience: 60,
-            summary: "Analyze Data and generate reports"
+            summary: "Analyze Data and generate reports",
+            field: {
+              id: "4b6efd26-e368-4bf4-9496-59442612d29b",
+              name:"MongoDB",
+              type: "Data Analytics"
+            }
           },
           {
-            field: {
-              name:"SQL Server",
-              type: "Data Analytics",
-            },
+            id: "50f5a4f6-a28c-4d84-bf57-a86e1326dfec",
             experience: 36,
-            summary: "Analyze Data and generate reports "
+            summary: "Analyze Data and generate reports ",
+            field: {
+              id: "834cb8e7-51b8-4a4f-b9af-599a2e741b46",
+              name:"SQL Server",
+              type: "Data Analytics"
+            }
           }
         ],
         assignedTo: mongoose.Types.ObjectId(superiorIds[1]),

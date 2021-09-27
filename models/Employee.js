@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const FieldSchema = new Schema({
+  id: {
+    type: String,
+    required: true,
+    unique: true
+  },
   name: {
     type: String,
     required: true
@@ -13,6 +18,11 @@ const FieldSchema = new Schema({
 });
 
 const SkillSchema = new Schema({
+  id: {
+    type: String,
+    required: true,
+    unique: true
+  },
   field: {
     type: FieldSchema,
     required: true,
@@ -29,6 +39,7 @@ const SkillSchema = new Schema({
 });
 
 const AddressSchema = new Schema({
+  _id: false,
   street: {
     type: String,
     required: true,
@@ -56,6 +67,11 @@ const AddressSchema = new Schema({
 });
 
 const EmployeeSchema = new Schema({
+  id: {
+    type: String,
+    required: true,
+    unique: true
+  },
   firstName: {
     type: String,
     required: true,
