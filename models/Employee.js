@@ -118,7 +118,6 @@ const EmployeeSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Employee'
     },
-  
 });
 
 const Employee = mongoose.model("Employee", EmployeeSchema);
