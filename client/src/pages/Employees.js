@@ -16,21 +16,19 @@ const Employees = () => {
   function loadEmployees() {
     API.findAllEmployees() 
       .then(res => {
-        console.log(res);
         setEmployees(res.data);
       })
       .catch(err => console.error(err))
     };
 
   return (
-    <Container fluid>
+    <Container >
           <Row>
-            <Col size="md-6" >
+            <Col size="md-12" className="text-center" >
               <Jumbotron>
                   <h1>Perficient Employees</h1>
               </Jumbotron>
-              {/* <EmployeeList employees={employeesState}/> */}
-                
+              <EmployeeList employees={employeesState}/>
             </Col>
           </Row>
     </Container>

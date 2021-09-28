@@ -14,7 +14,7 @@ const App = () => {
           <Route exact path={["/"]}>
             <Employees />
           </Route>
-          <Route exact path={["/employee/:id"]}>
+          <Route exact path="/employee/:id">
             <Detail />
           </Route>
           <Route>

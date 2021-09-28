@@ -8,7 +8,6 @@ module.exports = {
     db.Employee
       .find({})
       .then(dbModel =>{
-        console.log (dbModel);
         res.setHeader("Description", "Retrieved all Perficient employees.");
         res.setHeader("X-Total-Count", dbModel.length);
         res.status(200).json(dbModel);

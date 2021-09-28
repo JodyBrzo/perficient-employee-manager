@@ -1,19 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function EmployeeList({ props }) {
+function EmployeeList(props) {
   return (
-    <div>
-      <ul>
+    <div className="container">
+      <ul className="list-unstyled text-center justify-content-center">
+        {console.log("Hello from Employee List")}
+        {console.log("Showing Props",props)}
+        {console.log(props.employees.length)}
+        
         {props.employees.map(employee => (
-          <li>
-            <Link to={"/employees/" + employee.id}>
+          <li key={employee.id} >
+            <Link to={"/employee/" + employee.id}>
               <strong>
                 {employee.firstName + " " + employee.lastName} - {employee.role}
               </strong>
             </Link>
           </li>
         ))};
+
       </ul>
     </div>
   );

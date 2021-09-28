@@ -12,13 +12,13 @@ function Detail(props) {
         <Row>
           <Col size="md-12">
             <Jumbotron>
-              <h1>
-              </h1>
+              <h1>Employee Details</h1>
             </Jumbotron>
           </Col>
         </Row>
         <Row>
-          <Col size="md-10 md-offset-1">
+          <Col size="md-12">
+
           </Col>
         </Row>
         <Row>
